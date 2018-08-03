@@ -1,13 +1,19 @@
 import Vapi from "vuex-rest-api"
+// import { base_url } from '../../config/base'
 const posts = new Vapi({
-    baseURL: "https://jsonplaceholder.typicode.com",
+    // baseURL: base_url,
+    requestConfig: {
+        headers: {
+            'token': '1234'
+        }
+    },
     state: {
         posts: [],
-        currentPost: ''
+        post: ''
     }
 }).get({
     action: "getPost",
-    property: "currentPost",
+    property: "post",
     path: ({ id }) => `/posts/${id}`
 }).get({
     action: "listPosts",

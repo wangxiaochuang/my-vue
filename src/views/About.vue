@@ -1,12 +1,12 @@
 <template>
   <div class="about">
-    <h1>This is an about page {{currentPost}}</h1>
+    <h1>This is an about page {{post}}</h1>
     <br>
     <br>
     <div>
       <ul>
         <li :key="post.id" v-for="post in posts">
-          <button @click="getPost(post.id)">get</button>
+          <button @click="getPost({params: {id: post.id}})">get</button>
           {{post}}
         </li>
       </ul>
@@ -25,16 +25,13 @@ export default {
     // make states available
     computed: mapState({
         posts: state => state.posts.posts,
-        currentPost: state => state.posts.currentPost
+        post: state => state.posts.post
     }),
     methods: {
         ...mapActions([
             "listPosts",
             "getPost"
-        ]),
-        test: (id) = {
-            this.getPost(id)
-        }
+        ])
     }
 }
 </script>
