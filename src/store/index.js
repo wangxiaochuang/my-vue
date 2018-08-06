@@ -8,7 +8,9 @@ import { getToken } from '../utils/cookie'
 import { auth_key, base_url } from '../config/base'
 
 // axios setting begin
-Vue.use(axios)
+// Vue.use(axios)
+Vue.prototype.$http = axios
+
 axios.defaults.baseURL = base_url
 axios.interceptors.request.use(function (config) {
     NProgress.start()

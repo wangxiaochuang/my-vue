@@ -1,22 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const _import = require('./_import_' + process.env.NODE_ENV)
+import Layout from '../views/layout/Layout.vue'
+import Login from '../views/login/index.vue'
+
 Vue.use(Router)
+
+const constantRoutes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: Layout
+  }
+]
 
 export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            // component: _import('Home')
-            component: _import('Home')
-        },
-        {
-            path: '/about',
-            name: 'about',
-            component: _import('About')
-        }
-    ]
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
 })
