@@ -23,7 +23,7 @@
                 <span class="md-error" v-else-if="!$v.form.password.minLength">密码无效</span>
               </md-field>
               <md-card-actions>
-                <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
+                <md-button type="submit" class="md-primary" :disabled="sending">登录</md-button>
               </md-card-actions>
             </div>
           </div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex'
   import {validationMixin} from 'vuelidate'
   import {
     required,
@@ -63,7 +64,14 @@
         },
       }
     },
+    computed: mapState({
+      userinfo: state => state.session.userinfo
+    }),
     methods: {
+      ...mapActions([
+        "login",
+        "logout"
+      ]),
       getValidationClass(fieldName) {
         const field = this.$v.form[fieldName]
 
@@ -78,22 +86,15 @@
         this.form.username = null
         this.form.password = null
       },
-      saveUser() {
+      loginUser() {
         this.sending = true
-
-        // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
-          this.lastUser = `${this.form.username} ${this.form.password}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
+        this.login()
       },
       validateUser() {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
-          this.saveUser()
+          this.loginUser()
         }
       }
     }
