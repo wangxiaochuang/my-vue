@@ -86,9 +86,14 @@
         this.form.username = null
         this.form.password = null
       },
-      loginUser() {
+      async loginUser() {
         this.sending = true
-        this.login()
+        try {
+          await this.login({data: this.form})
+        } catch (e) {
+          console.log('login fail fail fail')
+        }
+        console.log(this.userinfo.username)
       },
       validateUser() {
         this.$v.$touch()

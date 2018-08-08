@@ -5,8 +5,8 @@ import session from './modules/session'
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {getToken} from '../utils/cookie'
-import {auth_key, base_url} from '../config/base'
+import { getToken } from '../utils/cookie'
+import { auth_key, base_url } from '../config/base'
 
 // axios setting begin
 // Vue.use(axios)
@@ -29,12 +29,16 @@ axios.interceptors.response.use(function (response) {
   const res = response.data
   if (response.status === 401 || res.error_no === 40101) {
     console.log('please login agin')
+    return Promise.reject('error');
   } else if (res.error_no === 40301) {
     console.log('permission deny')
+    return Promise.reject('error');
   } else if (res.error_no === 40001) {
     console.log('username or password wrong')
+    return Promise.reject('error');
   } else if (response.status !== 200 && res.error_no !== 200) {
     console.log(res.error_message)
+    return Promise.reject('error');
   } else {
     return res
   }
