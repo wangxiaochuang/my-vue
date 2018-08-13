@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Layout from '../views/layout/Layout.vue'
 import Login from '../views/login/index.vue'
 
+import DashBoard from '../views/dashboard/DashBoard.vue'
 import UserManager from '../views/manager/UserManager.vue'
 import MenuManager from '../views/manager/MenuManager.vue'
 import GroupManager from '../views/manager/GroupManager.vue'
@@ -19,20 +20,14 @@ const constantRoutes = [
   {
     path: '/',
     name: 'home',
-    component: Layout
+    component: Layout,
+    redirect: '/dashboard'
   }
 ]
 
-export default new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes.concat(asyncRouterMap)
-})
-
-const asyncRouterMap = [
+export const asyncRouterMap = [
   {
-    path: '/baseManager',
+    path: '/dashboard',
     name: '基础配置管理',
     component: Layout,
     children: [
@@ -59,5 +54,12 @@ const asyncRouterMap = [
     ]
   }
 ]
+
+export default new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  scrollBehavior: () => ({ y: 0 }),
+  routes: constantRoutes.concat(asyncRouterMap)
+})
 
 

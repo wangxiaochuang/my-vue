@@ -18,7 +18,7 @@
 
       <md-app-drawer md-persistent="full" :md-active.sync="menuVisible">
         <md-toolbar md-elevation="0">
-          <span>菜单区</span>
+          <span>CMDB</span>
 
           <div class="md-toolbar-section-end">
             <md-button class="md-icon-button md-dense" @click="toggleMenu">
@@ -59,16 +59,19 @@
 
 <style lang="scss" scoped>
   .page-container {
+    height: 100%;
     .md-app {
-      max-height: 400px;
+      height: 100%;
+      /*max-height: 400px;*/
       /*border: 1px solid rgba(#000, .12);*/
 
       .md-drawer {
         width: 230px;
         max-width: calc(100vw - 125px);
+        background-color: rgb(42,57,76);
+        color: rgb(183,196,212)
       }
     }
   }
-
-
 </style>
+
