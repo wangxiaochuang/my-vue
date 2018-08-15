@@ -1,43 +1,15 @@
 <template>
-  <div class="page-container">
-    <md-app md-waterfall md-mode="fixed">
-      <md-app-toolbar class="md-primary">
-        <div class="md-toolbar-row">
-          <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button" @click="toggleMenu" v-if="!menuVisible">
-              <md-icon>menu</md-icon>
-            </md-button>
-            cmdb
-          </div>
-          <div class="md-toolbar-section-end">
-            <nav-bar/>
-          </div>
-        </div>
-
-      </md-app-toolbar>
-
-      <md-app-drawer md-persistent="full" :md-active.sync="menuVisible">
-        <md-toolbar md-elevation="0">
-          <span>CMDB</span>
-
-          <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button md-dense" @click="toggleMenu">
-              <md-icon>keyboard_arrow_left</md-icon>
-            </md-button>
-          </div>
-        </md-toolbar>
-        <side-bar/>
-      </md-app-drawer>
-
-      <md-app-content>
-        <app-main/>
-      </md-app-content>
-    </md-app>
+  <div class="app-wrapper">
+    <side-bar class="sidebar-container"></side-bar>
+    <div class="main-container">
+      <nav-bar class="nav-bar"></nav-bar>
+      <app-main class="app-main"></app-main>
+    </div>
   </div>
 </template>
 
 <script>
-  import {NavBar, SideBar, AppMain} from './index';
+  import {NavBar, SideBar, AppMain} from './components'
 
   export default {
     name: 'layout',
@@ -47,29 +19,26 @@
       AppMain
     },
     data: () => ({
-      menuVisible: false
     }),
     methods: {
-      toggleMenu() {
-        this.menuVisible = !this.menuVisible
-      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
-  .page-container {
+  .app-wrapper {
     height: 100%;
-    .md-app {
-      height: 100%;
-      /*max-height: 400px;*/
-      /*border: 1px solid rgba(#000, .12);*/
-
-      .md-drawer {
-        width: 230px;
-        max-width: calc(100vw - 125px);
-        background-color: rgb(42,57,76);
-        color: rgb(183,196,212)
+    display: flex;
+    .main-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      .nav-bar {
+        height: 50px;
+      }
+      .app-main {
+        flex-grow: 1;
+        background-color: #2c3e50;
       }
     }
   }
