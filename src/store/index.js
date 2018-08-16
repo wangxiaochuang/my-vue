@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import posts from './modules/posts'
 import session from './modules/session'
+import app from './modules/app'
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '../utils/cookie'
 import { auth_key, base_url } from '../config/base'
+import getters from './getters'
 
 // axios setting begin
 // Vue.use(axios)
@@ -47,12 +49,13 @@ axios.interceptors.response.use(function (response) {
 })
 // axios setting end
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
+    app,
     posts,
     session
-  }
+  },
+  getters
 })

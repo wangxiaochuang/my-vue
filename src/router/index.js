@@ -28,27 +28,27 @@ const constantRoutes = [
 export const asyncRouterMap = [
   {
     path: '/dashboard',
-    name: '基础配置管理',
+    name: 'baseManager',
     component: Layout,
     children: [
       {
         path: 'userManager',
-        name: '用户管理',
+        name: 'userManager',
         component: UserManager
       },
       {
         path: 'menuManager',
-        name: '菜单管理',
+        name: 'menuManager',
         component: MenuManager
       },
       {
         path: 'groupManager',
-        name: '角色管理',
+        name: 'groupManager',
         component: GroupManager
       },
       {
         path: 'groupTypeManager',
-        name: '角色类型管理',
+        name: 'groupTypeManager',
         component: GroupTypeManager
       },
     ]

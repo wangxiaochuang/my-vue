@@ -1,28 +1,32 @@
 <template>
-  <div>
-    <i class="el-icon-menu"></i>
+  <div class="navbar-container">
+    <i class="el-icon-menu" @click="toggleSideBar"></i>
   </div>
 
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
       }
     },
     methods: {
-      toggleSideBar() {
-        console.log('xxx')
-      },
+      ...mapActions([
+        "toggleSideBar"
+      ]),
       logout () {
       }
-//      login () {
-//        this.$router.push('login')
-//      }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  .navbar-container {
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
 </style>
