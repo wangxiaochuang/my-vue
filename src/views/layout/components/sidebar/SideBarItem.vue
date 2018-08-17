@@ -1,28 +1,32 @@
 <template>
   <div>
-    <router-link v-if="!item.children">
-      <el-menu-item :index="item.path">{{item.name}}</el-menu-item>
+    <router-link v-if="!hasChildren" :to="item.path">
+      <el-menu-item :index="item.path">
+        <i class="el-icon-location"></i>
+        <span slot="title">{{item.name}}</span>
+      </el-menu-item>
     </router-link>
 
-    <el-submenu v-else :index="item.path || item.path">
+    <el-submenu v-else :index="item.path">
 
       <template slot="title">
-        <span slot="title">{{item.name}}</span>
+        <i class="el-icon-location"></i>
+        <span>{{item.name}}</span>
       </template>
 
-      <template v-for="child in item.children">
-        <side-bar-item v-if="child.children" :key="child.name" :item="child" :base-path="child.path"></side-bar-item>
+      <side-bar-item v-for="child in item.children" :key="child.name" :item="child"
+                     :base-path="child.path"></side-bar-item>
 
-        <el-menu-item v-else :index="child.name">
-          <span slot="title">{{child.name}}</span>
-        </el-menu-item>
-      </template>
     </el-submenu>
   </div>
 </template>
 
 <script>
   export default {
+    name: 'SideBarItem',
+    data: () => {
+      return {}
+    },
     props: {
       item: {
         type: Object,
@@ -31,6 +35,12 @@
       basePath: {
         type: String,
         default: ''
+      }
+    },
+    computed: {
+      hasChildren() {
+        let res = this.item.hasOwnProperty("children")
+        return res
       }
     }
   }

@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <div class="app-wrapper" :class="classObj">
     <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="closeSideBar"></div>

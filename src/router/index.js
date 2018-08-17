@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Layout from '../views/layout/Layout.vue'
 import Login from '../views/login/index.vue'
 
-import DashBoard from '../views/dashboard/DashBoard.vue'
 import UserManager from '../views/manager/UserManager.vue'
 import MenuManager from '../views/manager/MenuManager.vue'
 import GroupManager from '../views/manager/GroupManager.vue'
@@ -28,29 +27,36 @@ const constantRoutes = [
 export const asyncRouterMap = [
   {
     path: '/dashboard',
-    name: 'baseManager',
+    name: '导航一',
     component: Layout,
     children: [
       {
         path: 'userManager',
-        name: 'userManager',
+        name: '导航二',
         component: UserManager
       },
       {
         path: 'menuManager',
-        name: 'menuManager',
+        name: '导航三',
         component: MenuManager
       },
       {
         path: 'groupManager',
-        name: 'groupManager',
+        name: '导航四',
         component: GroupManager
       },
       {
         path: 'groupTypeManager',
-        name: 'groupTypeManager',
-        component: GroupTypeManager
-      },
+        name: '导航五',
+        component: GroupTypeManager,
+        children: [
+          {
+            path: 'adduser',
+            name: 'adduser',
+            component: MenuManager
+          }
+        ]
+      }
     ]
   }
 ]
