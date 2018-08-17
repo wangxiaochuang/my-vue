@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-container">
-    <i class="el-icon-menu" @click="toggleSideBar"></i>
+    <font-awesome-icon icon="bars" @click="toggleSideBar"/>
   </div>
 
 </template>

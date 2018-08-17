@@ -14,13 +14,15 @@ const constantRoutes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    hiden: true
   },
   {
     path: '/',
     name: 'home',
     component: Layout,
-    redirect: '/dashboard'
+    redirect: '/dashboard',
+    hiden: true
   }
 ]
 

@@ -44,7 +44,8 @@
 
 <style lang="scss" scoped>
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
+    width: 100%;
+    min-width: 200px;
     min-height: 400px;
   }
 </style>

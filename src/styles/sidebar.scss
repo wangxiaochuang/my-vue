@@ -14,6 +14,7 @@
         left: 0;
         bottom: 0;
         z-index: 1001;
+        width: 60vw;
       }
     }
     &.hideSidebar {
@@ -25,7 +26,7 @@
   &.desktop {
     &.openSidebar {
       .sidebar-container {
-
+        width: 16vw;
       }
     }
     &.hideSidebar {

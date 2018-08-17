@@ -23,7 +23,6 @@
       SideBar,
       AppMain
     },
-    data: () => ({}),
     mixins: [ResizeMixin],
     methods: {
       ...mapActions([
