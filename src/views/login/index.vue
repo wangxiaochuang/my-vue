@@ -1,39 +1,32 @@
 <template>
   <div class="login-container">
-    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+    <el-form :model="form" status-icon :rules="rules" ref="form" class="demo-ruleForm">
       <el-row :gutter="20" type="flex" justify="center">
-        <el-col :sm="10">
-          <el-form-item label="" prop="pass">
+        <el-col :sm="8">
+          <el-form-item>
             <h1 align="center">登录</h1>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="20" type="flex" justify="center">
-        <el-col :sm="10">
-          <el-form-item prop="pass">
-            <el-input prefix-icon="el-icon-cmdb-like" type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+        <el-col :sm="8">
+          <el-form-item prop="username">
+            <el-input prefix-icon="el-icon-cmdb-user" type="text" v-model="form.username" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="20" type="flex" justify="center">
-        <el-col :sm="10">
-          <el-form-item prop="checkPass">
-            <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+        <el-col :sm="8">
+          <el-form-item prop="password">
+            <el-input prefix-icon="el-icon-cmdb-lock" type="password" v-model="form.password" auto-complete="off"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
       <el-row :gutter="20" type="flex" justify="center">
-        <el-col :sm="10">
-          <el-form-item prop="age">
-            <el-input v-model.number="ruleForm2.age"></el-input>
-          </el-form-item>
-        </el-col>
-      </el-row>
-      <el-row :gutter="20" type="flex" justify="center">
-        <el-col :sm="10">
+        <el-col :sm="8">
           <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-            <el-button @click="resetForm('ruleForm2')">重置</el-button>
+            <el-button type="primary" @click="submitForm('form')">提交</el-button>
+            <el-button @click="resetForm('form')">重置</el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -46,56 +39,34 @@
 
   export default {
     data() {
-      var checkAge = (rule, value, callback) => {
-        if (!value) {
-          return callback(new Error('年龄不能为空'));
-        }
-        setTimeout(() => {
-          if (!Number.isInteger(value)) {
-            callback(new Error('请输入数字值'));
-          } else {
-            if (value < 18) {
-              callback(new Error('必须年满18岁'));
-            } else {
-              callback();
-            }
-          }
-        }, 1000);
-      };
-      var validatePass = (rule, value, callback) => {
+      let validateUsername = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请输入密码'));
+          callback(new Error('请输入用户名'));
         } else {
-          if (this.ruleForm2.checkPass !== '') {
-            this.$refs.ruleForm2.validateField('checkPass');
+          if (this.form.password !== '') {
+            this.$refs.form.validateField('password');
           }
           callback();
         }
       };
-      var validatePass2 = (rule, value, callback) => {
+      let validatePassword = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm2.pass) {
-          callback(new Error('两次输入密码不一致!'));
+          callback(new Error('请输入密码'));
         } else {
           callback();
         }
       };
       return {
-        ruleForm2: {
-          pass: '',
-          checkPass: '',
-          age: ''
+        form: {
+          username: '',
+          password: ''
         },
-        rules2: {
-          pass: [
-            {validator: validatePass, trigger: 'blur'}
+        rules: {
+          username: [
+            {validator: validateUsername, trigger: 'blur'}
           ],
-          checkPass: [
-            {validator: validatePass2, trigger: 'blur'}
-          ],
-          age: [
-            {validator: checkAge, trigger: 'blur'}
+          password: [
+            {validator: validatePassword, trigger: 'blur'}
           ]
         }
       }
@@ -105,15 +76,19 @@
         "login",
         "logout"
       ]),
-      async loginUser() {
-        this.sending = true
-        try {
-          await
-            this.login({data: this.form})
-        } catch (e) {
-          console.log('login fail fail fail')
-        }
-        console.log(this.userinfo.username)
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.login({params: this.model})
+//            this.$route.push("/dashboard")
+            console.log(this.router)
+          } else {
+            return false;
+          }
+        })
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
       }
     }
   }
