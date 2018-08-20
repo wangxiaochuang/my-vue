@@ -80,8 +80,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.login({params: this.model})
-//            this.$route.push("/dashboard")
-            console.log(this.router)
+            this.$router.replace("dashboard")
           } else {
             return false;
           }
