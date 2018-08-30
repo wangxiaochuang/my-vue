@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Layout from '../views/layout/Layout.vue'
 import Login from '../views/login/index.vue'
 
-import UserManager from '../views/manager/UserManager.vue'
+import ShellPage from '../views/shell/ShellPage.vue'
 import MenuManager from '../views/manager/MenuManager.vue'
 import GroupManager from '../views/manager/GroupManager.vue'
 import GroupTypeManager from '../views/manager/GroupTypeManager.vue'
@@ -35,7 +35,7 @@ export const asyncRouterMap = [
       {
         path: 'userManager',
         name: '导航二',
-        component: UserManager
+        component: ShellPage
       },
       {
         path: 'menuManager',

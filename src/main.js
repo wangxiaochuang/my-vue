@@ -1,3 +1,4 @@
+// import Vue from 'vue'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router/'
@@ -7,6 +8,8 @@ import './element/index'
 import './awesome/index'
 import '@/styles/index.scss'
 import './mock/mock'
+
+import 'xterm/dist/xterm.css'
 
 Vue.config.productionTip = false
 
